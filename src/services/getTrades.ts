@@ -23,6 +23,8 @@ export interface ProcessedKline {
     low: number,
     close: number,
     volume: number,
+    change: number,
+    changePercent: number
 }
 
 function processRawData(rawData: BinanceKlineRaw[]): ProcessedKline[]{
@@ -32,6 +34,8 @@ return rawData.map((kline: BinanceKlineRaw) => {
     const low = parseFloat(kline[3])
     const close = parseFloat(kline[4])
     const volume = parseFloat(kline[5])
+    const change = close - open
+    const changePercent = open !== 0 ? (change / open) * 100 : 0
 
     return {
         timestamp: kline[0],
@@ -39,7 +43,9 @@ return rawData.map((kline: BinanceKlineRaw) => {
         high,
         low,
         close,
-        volume
+        volume,
+        change,
+        changePercent
     }
 })
 
