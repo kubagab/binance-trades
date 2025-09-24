@@ -4,7 +4,7 @@ import { analzyeTrades } from "../services/analyze";
 
 const router = Router();
 
-router.get('/analzye', async (req: Request, res: Response) => {
+router.get('/trades', async (req: Request, res: Response) => {
     try {
         const processedData = await getTrades()
         const analyzed = analzyeTrades(processedData)
